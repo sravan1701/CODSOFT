@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Simple Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="calculator">
+    <div class="display" id="display">0</div>
+    <div class="buttons">
+      <button onclick="appendValue('AC')" class="acde">AC</button>
+      <button onclick="appendValue('DE')" class="acde">DE</button>
+      <button onclick="appendValue('%')" class="_operator">%</button>
+      <button onclick="appendValue('/')" class="_operator">/</button>
+      <button onclick="appendValue('7')">7</button>
+      <button onclick="appendValue('8')">8</button>
+      <button onclick="appendValue(' 9')">9</button>
+      <button onclick="appendValue('*')" class="_operator">*</button>
+      <button onclick="appendValue('4')">4</button>
+      <button onclick="appendValue('5')">5</button>
+      <button onclick="appendValue('6')">6</button>
+      <button onclick="appendValue('-')" class="_operator">-</button>
+      <button onclick="appendValue('1')">1</button>
+      <button onclick="appendValue('2')">2</button>
+      <button onclick="appendValue('3')">3</button>
+      <button onclick="appendValue('+')" class="_operator">+</button>
+      <button onclick="appendValue('0')">0</button>
+      <button onclick="appendValue('.')">.</button>
+      <button style="grid-column: span 2;" onclick="calculate()" class="_operator">=</button>
+    </div>
+  </div>
+
+  <script>
+    let display = document.getElementById('display');
+    let currentValue = '0';
+
+    function appendValue(value) {
+      if (value === 'AC') {
+        currentValue = '0';
+      } else if (value === 'DE') {
+        currentValue = currentValue.slice(0, -1);
+      } else if (value === '%') {
+        currentValue = currentValue / 100;
+      } else {
+        if (currentValue === '0') {
+          currentValue = value;
+        } else {
+          currentValue += value;
+        }
+      }
+      display.textContent = currentValue;
+    }
+
+    function calculate() {
+      try {
+        currentValue = eval(currentValue);
+        display.textContent = currentValue;
+      } catch (error) {
+        display.textContent = 'Error';
+      }
+    }
+  </script>
+</body>
+
+</html>
